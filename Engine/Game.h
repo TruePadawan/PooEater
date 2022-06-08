@@ -53,7 +53,7 @@ private:
 	std::mt19937 RNG;
 	std::uniform_real_distribution<float> xDist{ 0.0f,750.0f }; // DISTRIBUTION FOR RANDOM VALUES FOR THE X CO-ORDINATES OF POO ENTITIES
 	std::uniform_real_distribution<float> yDist{ 0.0f, 550.0f }; // DISTRIBUTION FOR RANDOM VALUES FOR THE Y CO-ORDINATES OF POO ENTITIES
-	std::uniform_real_distribution<float> velocityDist{ -1.0f, 1.0f };
+	std::uniform_real_distribution<float> velocityDist{ -2.5f, 2.5f };
 	Player player;
 	std::array<Poo, 12> pooEntities;
 	Box box;
