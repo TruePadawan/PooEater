@@ -295,6 +295,8 @@ void Poo::move()
 
 	this->x += vx;
 	this->y += vy;
+
+	keepEntityInsideWindow();
 }
 
 void Poo::increaseSpeed(float increment)

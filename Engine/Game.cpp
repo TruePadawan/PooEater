@@ -81,7 +81,6 @@ void Game::UpdateModel()
 	for (Poo& poo : pooEntities)
 	{
 		poo.move();
-		poo.keepEntityInsideWindow();
 	}
 
 	// ON EVERY FRAME RENDER, MAKE SURE THE PLAYER IS WITHIN THE BOUNDARY OF THE WINDOW
