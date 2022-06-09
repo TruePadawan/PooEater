@@ -56,6 +56,7 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
+	void DrawLine(int x, int y, int width, Color c = Colors::Red);
 	void DrawBox(int x, int y, int width, int height, Color c);
 	~Graphics();
 private:

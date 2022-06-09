@@ -316,6 +316,14 @@ void Graphics::PutPixel( int x,int y,Color c )
 	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
 }
 
+void Graphics::DrawLine(int x, int y, int width, Color c)
+{
+	for (int i = x; i < width + x; ++i)
+	{
+		PutPixel(i, y, c);
+	}
+}
+
 void Graphics::DrawBox(int x, int y, int width, int height, Color c)
 {
 	for (int i = x; i < width + x; i++)
