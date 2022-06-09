@@ -335,6 +335,17 @@ void Graphics::DrawBox(int x, int y, int width, int height, Color c)
 	}
 }
 
+void Graphics::DrawTriangle(int x, int y, int radius, Color c)
+{
+	assert(y - radius >= 0);
+	int diameter = radius * 2;
+
+	for (int i = x; i < (radius*2) + x; ++i, --y, diameter -= 2)
+	{
+		DrawLine(i, y, diameter, c);
+	}
+}
+
 //////////////////////////////////////////////////
 //           Graphics Exception
 Graphics::Exception::Exception( HRESULT hr,const std::wstring& note,const wchar_t* file,unsigned int line )
