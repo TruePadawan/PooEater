@@ -59,6 +59,7 @@ public:
 	void DrawLine(int x, int y, int width, Color c = Colors::Red);
 	void DrawBox(int x, int y, int width, int height, Color c);
 	void DrawTriangle(int x, int y, int radius, Color c = Colors::Red);
+	void DrawCircle(int cx, int cy, int radius, Color c = Colors::Red);
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

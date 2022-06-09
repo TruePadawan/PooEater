@@ -346,6 +346,24 @@ void Graphics::DrawTriangle(int x, int y, int radius, Color c)
 	}
 }
 
+void Graphics::DrawCircle(int cx, int cy, int radius, Color c)
+{
+	int radius_sq = radius * radius;
+	for (int x = cx - radius + 1; x < cx + radius; ++x)
+	{
+		for (int y = cy - radius + 1; y < cy + radius; ++y)
+		{
+			int delta_x = cx - x;
+			int delta_y = cy - y;
+
+			if ((delta_x * delta_x) + (delta_y * delta_y) <= radius_sq)
+			{
+				PutPixel(x, y, c);
+			}
+		}
+	}
+}
+
 //////////////////////////////////////////////////
 //           Graphics Exception
 Graphics::Exception::Exception( HRESULT hr,const std::wstring& note,const wchar_t* file,unsigned int line )
