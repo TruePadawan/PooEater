@@ -60,31 +60,12 @@ void Game::UpdateModel()
 		return;
 	}
 
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		player.moveY(-4.0f);
-	}
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		player.moveY(4.0f);
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		player.moveX(-4.0f);
-	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		player.moveX(4.0f);
-	}
-	
-	// ON EVERY FRAME RENDER, MOVE THE POO ENTITIES AND KEEP THEM WITHIN THE WINDOW
+	// ON EVERY FRAME RENDER, MOVE THE ENTITIES AND KEEP THEM WITHIN THE WINDOW
+	player.move(wnd.kbd);
 	for (Poo& poo : pooEntities)
 	{
 		poo.move();
 	}
-
-	// ON EVERY FRAME RENDER, MAKE SURE THE PLAYER IS WITHIN THE BOUNDARY OF THE WINDOW
-	player.keepEntityInsideWindow();
 
 	// IF ANY POO IS HIT, GAME OVER
 	bool anyCollision = std::any_of(pooEntities.begin(), pooEntities.end(), [&](Poo &poo) {
