@@ -8,7 +8,7 @@ class Player :
 public:
     Player() = delete;
     Player(float x, float y, float _speed = 4.0f);
-    void move(const Keyboard& kbd);
+    void move(const Keyboard& kbd, const float frameTime);
     float getX() const;
     float getY() const;
     void draw(Graphics &gfx) const;

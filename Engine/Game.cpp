@@ -27,7 +27,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	player(400.0f, 300.0f), RNG(seed()), box(gfx)
+	player(400.0f, 300.0f), RNG(seed()), box(gfx), frameTimer()
 {
 	for (Poo& poo : pooEntities)
 	{
@@ -49,6 +49,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float frameTime = frameTimer.timeInterval();
+
 	if (wnd.kbd.KeyIsPressed(VK_RETURN) && !gameStarted)
 	{
 		gameStarted = true;
@@ -61,10 +63,10 @@ void Game::UpdateModel()
 	}
 
 	// ON EVERY FRAME RENDER, MOVE THE ENTITIES AND KEEP THEM WITHIN THE WINDOW
-	player.move(wnd.kbd);
+	player.move(wnd.kbd, frameTime);
 	for (Poo& poo : pooEntities)
 	{
-		poo.move();
+		poo.move(frameTime);
 	}
 
 	// IF ANY POO IS HIT, GAME OVER

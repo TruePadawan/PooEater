@@ -26,6 +26,7 @@
 #include "Player.h"
 #include "Poo.h"
 #include "Box.h"
+#include "FrameTimer.h"
 #include <random>
 #include <array>
 
@@ -53,12 +54,13 @@ private:
 	std::mt19937 RNG;
 	std::uniform_real_distribution<float> xDist{ 0.0f,750.0f }; // DISTRIBUTION FOR RANDOM VALUES FOR THE X CO-ORDINATES OF POO ENTITIES
 	std::uniform_real_distribution<float> yDist{ 0.0f, 550.0f }; // DISTRIBUTION FOR RANDOM VALUES FOR THE Y CO-ORDINATES OF POO ENTITIES
-	std::uniform_real_distribution<float> velocityDist{ -2.5f, 2.5f };
+	std::uniform_real_distribution<float> velocityDist{ -2.5f * 60.0f, 2.5f * 60.0f };
 	Player player;
 	std::array<Poo, 12> pooEntities;
 	Box box;
 	int trackerWidth;
 	bool gameStarted;
 	bool gameOver;
+	FrameTimer frameTimer;
 	/********************************/
 };

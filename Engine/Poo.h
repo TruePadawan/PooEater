@@ -8,7 +8,7 @@ public:
 	Poo();
 	Poo(float _x, float _y, float velocityX = -1, float velocityY = -1);
 	void draw(Graphics &gfx) const;
-	void move();
+	void move(const float frameTime);
 	void increaseSpeed(float increment = 0.5f);
 	bool isCollidingWith(const Player& player) const;
 public:

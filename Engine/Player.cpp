@@ -2,27 +2,27 @@
 #include "Graphics.h"
 
 Player::Player(float x, float y, float _speed)
-	:Entity(x, y), speed(_speed)
+	:Entity(x, y), speed(_speed * 60.0f)
 {
 }
 
-void Player::move(const Keyboard& kbd)
+void Player::move(const Keyboard& kbd, const float frameTime)
 {
 	if (kbd.KeyIsPressed(VK_UP))
 	{
-		moveY(-speed);
+		moveY(-speed * frameTime);
 	}
 	if (kbd.KeyIsPressed(VK_DOWN))
 	{
-		moveY(speed);
+		moveY(speed * frameTime);
 	}
 	if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		moveX(-speed);
+		moveX(-speed * frameTime);
 	}
 	if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		moveX(speed);
+		moveX(speed * frameTime);
 	}
 
 	keepEntityInsideWindow();

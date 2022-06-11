@@ -289,12 +289,12 @@ void Poo::keepEntityInsideWindow()
 	}
 }
 
-void Poo::move()
+void Poo::move(const float frameTime)
 {
 	assert(initialized == true);
 
-	this->x += vx;
-	this->y += vy;
+	this->x += vx * frameTime;
+	this->y += vy * frameTime;
 
 	keepEntityInsideWindow();
 }
