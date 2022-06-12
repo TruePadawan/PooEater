@@ -8,18 +8,16 @@ class Player :
 public:
     Player() = delete;
     Player(float x, float y, float _speed = 4.0f);
+    Player(Vector2D coordinate, float _speed = 4.0f);
     void move(const Keyboard& kbd, const float frameTime);
-    float getX() const;
-    float getY() const;
+    Vector2D getCoordinate() const;
     void draw(Graphics &gfx) const;
 private:
-    void moveX(float increment);
-    void moveY(float increment);
     void keepEntityInsideWindow();
 private:
     float speed;
 public:
-    static constexpr float WIDTH = 20;
-    static constexpr float HEIGHT = 20;
+    static constexpr float WIDTH = 20.0f;
+    static constexpr float HEIGHT = 20.0f;
 };
 

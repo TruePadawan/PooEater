@@ -6,58 +6,44 @@ Player::Player(float x, float y, float _speed)
 {
 }
 
+Player::Player(Vector2D coordinate, float _speed)
+{
+	Player(coordinate.x, coordinate.y, _speed);
+}
+
 void Player::move(const Keyboard& kbd, const float frameTime)
 {
 	if (kbd.KeyIsPressed(VK_UP))
 	{
-		moveY(-speed * frameTime);
+		coordinate.y += (-speed * frameTime);
 	}
 	if (kbd.KeyIsPressed(VK_DOWN))
 	{
-		moveY(speed * frameTime);
+		coordinate.y += (speed * frameTime);
 	}
 	if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		moveX(-speed * frameTime);
+		coordinate.x += (-speed * frameTime);
 	}
 	if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		moveX(speed * frameTime);
+		coordinate.x += (speed * frameTime);
 	}
 
 	keepEntityInsideWindow();
 }
 
-void Player::moveX(float increment)
+Vector2D Player::getCoordinate() const
 {
-	assert(initialized == true);
-
-	this->x += increment;
-}
-
-void Player::moveY(float increment)
-{
-	assert(initialized == true);
-
-	this->y += increment;
-}
-
-float Player::getX() const
-{
-	return this->x;
-}
-
-float Player::getY() const
-{
-	return this->y;
+	return this->coordinate;
 }
 
 void Player::draw(Graphics& gfx) const
 {
 	assert(initialized == true);
 
-	const int int_x = int(x);
-	const int int_y = int(y);
+	const int int_x = int(coordinate.x);
+	const int int_y = int(coordinate.y);
 
 	gfx.PutPixel(7 + int_x, 0 + int_y, 0, 0, 0);
 	gfx.PutPixel(8 + int_x, 0 + int_y, 0, 0, 0);
@@ -381,27 +367,27 @@ void Player::keepEntityInsideWindow()
 {
 	assert(initialized == true);
 
-	float right = x + WIDTH;
-	float down = y + HEIGHT;
+	float right = coordinate.x + WIDTH;
+	float down = coordinate.y + HEIGHT;
 
 	int screenWidth = Graphics::ScreenWidth;
 	int screenHeight = Graphics::ScreenHeight;
 
 	if (right >= screenWidth)
 	{
-		x = float(screenWidth - 1) - WIDTH;
+		coordinate.x = float(screenWidth - 1) - WIDTH;
 	}
-	else if (x < 0)
+	else if (coordinate.x < 0)
 	{
-		x = 0;
+		coordinate.x = 0;
 	}
 
 	if (down >= screenHeight)
 	{
-		y = float(screenHeight - 1) - HEIGHT;
+		coordinate.y = float(screenHeight - 1) - HEIGHT;
 	}
-	else if (y < 0)
+	else if (coordinate.y < 0)
 	{
-		y = 0;
+		coordinate.y = 0;
 	}
 }
