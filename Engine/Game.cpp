@@ -27,7 +27,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	player(400.0f, 300.0f), RNG(seed()), box(gfx), frameTimer()
+	player(400.0f, 300.0f), RNG(seed()), box(gfx), frameTimer(), xDist(0.0f, 750.0f), yDist(0.0f, 550.0f)
 {
 	for (Poo& poo : pooEntities)
 	{
