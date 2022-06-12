@@ -2,14 +2,14 @@
 #include <assert.h>
 
 Box::Box(Graphics& _gfx)
-	:gfx(_gfx), RNG(std::random_device()()), xDist(0, 750), yDist(0, 550), x(xDist(RNG)), y(yDist(RNG)),
+	:gfx(_gfx), RNG(std::random_device()()), xDist(0.0f, 750.0f), yDist(0.0f, 550.0f), coordinate(xDist(RNG), yDist(RNG)),
 	glowEffect(0), glowEffectModifier(4), boxColor(255, glowEffect, glowEffect)
 {
 }
 
 void Box::draw()
 {
-	gfx.DrawBox(x, y, DIMENSION, DIMENSION, boxColor);
+	gfx.DrawBox((int)coordinate.x, (int)coordinate.y, (int)DIMENSION, (int)DIMENSION, boxColor);
 
 	glowEffect += glowEffectModifier;
 	
@@ -29,24 +29,23 @@ void Box::draw()
 
 void Box::respawn()
 {
-	x = xDist(RNG);
-	y = yDist(RNG);
+	coordinate.x = xDist(RNG);
+	coordinate.y = yDist(RNG);
 }
 
 bool Box::isCollidingWith(const Player& player)
 {
-	float playerXCord = player.getX();
-	float playerYCord = player.getY();
+	Vector2D playerCord = player.getCoordinate();
 
-	const float player_left = playerXCord;
-	const float player_right = playerXCord + player.WIDTH;
-	const float player_top = playerYCord;
-	const float player_bottom = playerYCord + player.HEIGHT;
+	const float player_left = playerCord.x;
+	const float player_right = playerCord.x + player.WIDTH;
+	const float player_top = playerCord.y;
+	const float player_bottom = playerCord.y + player.HEIGHT;
 
-	const float box_left = (float)this->x;
-	const float box_right = float(this->x + this->DIMENSION);
-	const float box_top = (float)this->y;
-	const float box_bottom = float(this->y + this->DIMENSION);
+	const float box_left = coordinate.x;
+	const float box_right = coordinate.x + DIMENSION;
+	const float box_top = coordinate.y;
+	const float box_bottom = coordinate.y + DIMENSION;
 
 	return ((player_left <= box_right) &&
 		(player_right >= box_left) &&

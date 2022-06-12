@@ -11,14 +11,13 @@ public:
 	void respawn();
 	bool isCollidingWith(const Player& player);
 public:
-	static constexpr int DIMENSION = 20;
+	static constexpr float DIMENSION = 20.0f;
 private:
 	Graphics& gfx;
 	std::mt19937 RNG;
-	std::uniform_int_distribution<int> xDist{ 0,750 };
-	std::uniform_int_distribution<int> yDist{ 0, 550 };
-	int x;
-	int y;
+	std::uniform_real_distribution<float> xDist;
+	std::uniform_real_distribution<float> yDist;
+	Vector2D coordinate;
 	int glowEffect;
 	int glowEffectModifier;
 	Color boxColor;

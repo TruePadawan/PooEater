@@ -2,13 +2,19 @@
 #include "Graphics.h"
 
 Entity::Entity()
-	:x(0), y(0)
+	:coordinate(0, 0)
 {
 	initialized = false;
 }
 
 Entity::Entity(float _x, float _y)
-	:x(_x), y(_y)
+	:coordinate(_x, _y)
+{
+	initialized = true;
+}
+
+Entity::Entity(const Vector2D& position)
+	:coordinate(position)
 {
 	initialized = true;
 }
@@ -16,7 +22,6 @@ Entity::Entity(float _x, float _y)
 void Entity::operator=(const Entity& object)
 {
 	assert(initialized == false);
-	this->x = object.x;
-	this->y = object.y;
+	coordinate = object.coordinate;
 	initialized = true;
 }
