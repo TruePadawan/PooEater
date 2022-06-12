@@ -2,25 +2,26 @@
 #include "Graphics.h"
 
 Poo::Poo()
-	:Entity()
+	:Entity(), velocity(0, 0)
 {
-	this->vx = 0;
-	this->vy = 0;
 }
 
 Poo::Poo(float _x, float _y, float velocityX, float velocityY)
-	:Entity(_x, _y)
+	:Entity(_x, _y), velocity(velocityX, velocityY)
 {
-	(velocityX != 0.0f) ? vx = velocityX : vx = 1.0f;
-	(velocityY != 0.0f) ? vy = velocityY : vy = 1.0f;
+}
+
+Poo::Poo(const Vector2D& _coordinate, const Vector2D& _velocity)
+	:Entity(_coordinate), velocity(_velocity)
+{
 }
 
 void Poo::draw(Graphics& gfx) const
 {
 	assert(initialized == true);
 
-	const int int_x = int(x);
-	const int int_y = int(y);
+	const int int_x = int(coordinate.x);
+	const int int_y = int(coordinate.y);
 
 	gfx.PutPixel(14 + int_x, 0 + int_y, 138, 77, 0);
 	gfx.PutPixel(7 + int_x, 1 + int_y, 138, 77, 0);
@@ -260,32 +261,32 @@ void Poo::keepEntityInsideWindow()
 {
 	assert(initialized == true);
 
-	float right = x + WIDTH;
-	float down = y + HEIGHT;
+	float right = coordinate.x + WIDTH;
+	float down = coordinate.y + HEIGHT;
 
 	int screenWidth = Graphics::ScreenWidth;
 	int screenHeight = Graphics::ScreenHeight;
 
 	if (right >= screenWidth)
 	{
-		x = float(screenWidth - 1) - WIDTH;
-		vx = -vx;
+		coordinate.x = float(screenWidth - 1) - WIDTH;
+		velocity.x = -velocity.x;
 	}
-	else if (x < 0)
+	else if (coordinate.x < 0)
 	{
-		x = 0;
-		vx = -vx;
+		coordinate.x = 0;
+		velocity.x = -velocity.x;
 	}
 
 	if (down >= (float)screenHeight)
 	{
-		y = float(screenHeight - 1) - HEIGHT;
-		vy = -vy;
+		coordinate.y = float(screenHeight - 1) - HEIGHT;
+		velocity.y = -velocity.y;
 	}
-	else if (y < 0)
+	else if (coordinate.y < 0)
 	{
-		y = 0;
-		vy = -vy;
+		coordinate.y = 0;
+		velocity.y = -velocity.y;
 	}
 }
 
@@ -293,38 +294,33 @@ void Poo::move(const float frameTime)
 {
 	assert(initialized == true);
 
-	this->x += vx * frameTime;
-	this->y += vy * frameTime;
+	coordinate.x += (velocity.x * frameTime);
+	coordinate.y += (velocity.y * frameTime);
 
 	keepEntityInsideWindow();
 }
 
-void Poo::increaseSpeed(float increment)
+void Poo::increaseSpeed(float multiplier)
 {
 	assert(initialized == true);
-
-	if (increment <= 0) return;
-
-	(vx < 0) ? vx -= increment : vx += increment;
-	(vy < 0) ? vy -= increment : vy += increment;
+	velocity *= multiplier;
 }
 
 bool Poo::isCollidingWith(const Player& player) const
 {
 	assert(initialized == true);
 
-	float playerXCord = player.getX();
-	float playerYCord = player.getY();
+	Vector2D playerCord = player.getCoordinate();
 
-	const float player_left = playerXCord;
-	const float player_right = playerXCord + player.WIDTH;
-	const float player_top = playerYCord;
-	const float player_bottom = playerYCord + player.HEIGHT;
+	const float player_left = playerCord.x;
+	const float player_right = playerCord.x + player.WIDTH;
+	const float player_top = playerCord.y;
+	const float player_bottom = playerCord.y + player.HEIGHT;
 
-	const float poo_left = this->x;
-	const float poo_right = this->x + this->WIDTH;
-	const float poo_top = this->y;
-	const float poo_bottom = this->y + this->HEIGHT;
+	const float poo_left = this->coordinate.x;
+	const float poo_right = this->coordinate.x + this->WIDTH;
+	const float poo_top = this->coordinate.y;
+	const float poo_bottom = this->coordinate.y + this->HEIGHT;
 
 	return ((player_left <= poo_right) &&
 		(player_right >= poo_left) &&
