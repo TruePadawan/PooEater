@@ -31,7 +31,14 @@ Game::Game( MainWindow& wnd )
 {
 	for (Poo& poo : pooEntities)
 	{
-		poo = Poo(xDist(RNG), yDist(RNG), velocityDist(RNG), velocityDist(RNG));
+		float xCord = 0.0f;
+		float yCord = 0.0f;
+		do
+		{
+			xCord = xDist(RNG);
+			yCord = yDist(RNG);
+		} while ((xCord > 350.0f && yCord > 250.0f) || (xCord < 450.0f && yCord < 350.0f)); // PREVENT IT FROM SPAWNING TOO CLOSE TO PLAYER
+		poo = Poo(xCord, yCord, velocityDist(RNG), velocityDist(RNG));
 	}
 
 	gameStarted = false;
@@ -80,7 +87,7 @@ void Game::UpdateModel()
 		box.respawn();
 		for (Poo& poo : pooEntities)
 		{
-			poo.increaseSpeed();
+			poo.increaseSpeed(1.3);
 		}
 		if (trackerWidth + 10 < 780)
 		{
