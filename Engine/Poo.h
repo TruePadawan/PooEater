@@ -11,7 +11,7 @@ public:
 	Poo(const Vector2D& _coordinate, const Vector2D& _velocity);
 	void draw(Graphics &gfx) const;
 	void move(const float frameTime);
-	void increaseSpeed(float multiplier = 1.5);
+	void increaseSpeed(float multiplier = 1.1);
 	bool isCollidingWith(const Player& player) const;
 public:
 	static constexpr float WIDTH = 24.0f;
