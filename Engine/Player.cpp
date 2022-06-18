@@ -13,24 +13,46 @@ Player::Player(Vector2D coordinate, float _speed)
 
 void Player::move(const Keyboard& kbd, const float frameTime)
 {
+	Vector2D delta_coordinate{ 0, 0 };
 	if (kbd.KeyIsPressed(VK_UP))
 	{
-		coordinate.y += (-speed * frameTime);
+		delta_coordinate.y -= speed;
 	}
 	if (kbd.KeyIsPressed(VK_DOWN))
 	{
-		coordinate.y += (speed * frameTime);
+		delta_coordinate.y += speed;
 	}
 	if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		coordinate.x += (-speed * frameTime);
+		delta_coordinate.x -= speed;
 	}
 	if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		coordinate.x += (speed * frameTime);
+		delta_coordinate.x += speed;
 	}
 
+	delta_coordinate.normalize();
+	coordinate += delta_coordinate * speed * frameTime;
+
 	keepEntityInsideWindow();
+}
+
+void Player::move(const Mouse& mouse, const float frameTime)
+{
+	if (mouse.LeftIsPressed())
+	{
+		float xComp = (float)mouse.GetPosX();
+		float yComp = (float)mouse.GetPosY();
+		Vector2D destination{ xComp, yComp };
+		destination -= coordinate;
+
+		if (destination.getLengthSquared() > 2.0f)
+		{
+			coordinate += destination.normalize() * speed * frameTime;
+		}
+
+		keepEntityInsideWindow();
+	}
 }
 
 Vector2D Player::getCoordinate() const

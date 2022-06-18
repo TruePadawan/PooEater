@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 class Player :
     public Entity
@@ -10,6 +11,7 @@ public:
     Player(float x, float y, float _speed = 4.0f);
     Player(Vector2D coordinate, float _speed = 4.0f);
     void move(const Keyboard& kbd, const float frameTime);
+    void move(const Mouse& mouse, const float frameTime);
     Vector2D getCoordinate() const;
     void draw(Graphics &gfx) const;
 private:

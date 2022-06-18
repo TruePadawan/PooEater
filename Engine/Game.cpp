@@ -70,7 +70,9 @@ void Game::UpdateModel()
 	}
 
 	// ON EVERY FRAME RENDER, MOVE THE ENTITIES AND KEEP THEM WITHIN THE WINDOW
-	player.move(wnd.kbd, frameTime);
+	/*player.move(wnd.kbd, frameTime);*/
+	player.move(wnd.mouse, frameTime);
+
 	for (Poo& poo : pooEntities)
 	{
 		poo.move(frameTime);
