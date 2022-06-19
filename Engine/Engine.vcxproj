@@ -148,6 +148,7 @@
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
+    <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FrameTimer.h" />
@@ -159,10 +160,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Poo.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
@@ -174,6 +178,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Poo.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>

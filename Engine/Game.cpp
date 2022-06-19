@@ -1,5 +1,5 @@
-/****************************************************************************************** 
- *	Chili DirectX Framework Version 16.07.20											  *	
+/******************************************************************************************
+ *	Chili DirectX Framework Version 16.07.20											  *
  *	Game.cpp																			  *
  *	Copyright 2016 PlanetChili.net <http://www.planetchili.net>							  *
  *																						  *
@@ -23,10 +23,10 @@
 #include "Game.h"
 #include <algorithm>
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ),
+	wnd(wnd),
+	gfx(wnd),
 	player(400.0f, 300.0f), RNG(seed()), box(gfx), frameTimer(), xDist(0.0f, 750.0f), yDist(0.0f, 550.0f)
 {
 	for (Poo& poo : pooEntities)
@@ -48,7 +48,7 @@ Game::Game( MainWindow& wnd )
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
+	gfx.BeginFrame();
 	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
@@ -79,9 +79,9 @@ void Game::UpdateModel()
 	}
 
 	// IF ANY POO IS HIT, GAME OVER
-	bool anyCollision = std::any_of(pooEntities.begin(), pooEntities.end(), [&](Poo &poo) {
+	bool anyCollision = std::any_of(pooEntities.begin(), pooEntities.end(), [&](Poo& poo) {
 		return poo.isCollidingWith(player);
-	});
+		});
 
 	// IF BOX IS HIT, CHANGE ITS' POSITION AND INCREASE THE SPEED OF ALL POO ENTITIES
 	if (box.isCollidingWith(player))
@@ -113,7 +113,7 @@ void Game::ComposeFrame()
 
 	if (!gameStarted)
 	{
-		DrawTitle(326,213);
+		DrawTitle(326, 213);
 		return;
 	}
 
